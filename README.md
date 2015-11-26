@@ -8,3 +8,7 @@ N6 [<IPv6 Neighbor's address>] inet6
 R <ipv4 route>
 R6 <ipv6 route>
 ```
+and then run:
+```
+ ./bgpinjector <path/to/cfgfile>
+```
