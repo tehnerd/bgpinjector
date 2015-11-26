@@ -13,6 +13,7 @@ import (
 
 func ReadFile(fname string, to chan bgp2go.BGPProcessMsg) {
 	fd, err := os.Open(fname)
+	defer fd.Close()
 	if err != nil {
 		fmt.Printf("file doesnt exists")
 		os.Exit(-1)
