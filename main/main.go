@@ -41,7 +41,7 @@ func main() {
 	asn := flag.Uint64("ASN", 65101, "Our AS number")
 	rid := flag.Uint64("RID", 1, "Our router's ID")
 	flag.Parse()
-	if len(os.Args) != 2 {
+	if len(os.Args) < 2 {
 		fmt.Println("exiting. not enough arguments")
 		os.Exit(-1)
 	}
