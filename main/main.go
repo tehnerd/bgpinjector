@@ -40,17 +40,14 @@ func main() {
 	duration := flag.Uint64("duration", 3600, "Time to sleep before exit")
 	asn := flag.Uint64("ASN", 65101, "Our AS number")
 	rid := flag.Uint64("RID", 1, "Our router's ID")
+	cfg := flag.String("cfg", "./inj.cfg", "Our configuration file")
 	flag.Parse()
-	if len(os.Args) < 2 {
-		fmt.Println("exiting. not enough arguments")
-		os.Exit(-1)
-	}
 	fmt.Println("starting to inject bgp routes")
 	to := make(chan bgp2go.BGPProcessMsg)
 	from := make(chan bgp2go.BGPProcessMsg)
 	bgpContext := bgp2go.BGPContext{ASN: uint32(*asn), RouterID: uint32(*rid)}
 	go bgp2go.StartBGPProcess(to, from, bgpContext)
-	ReadFile(os.Args[1], to)
+	ReadFile(*cfg, to)
 	time.Sleep(time.Duration(*duration) * time.Second)
 	fmt.Println("i've slept enough. waking up...")
 }
